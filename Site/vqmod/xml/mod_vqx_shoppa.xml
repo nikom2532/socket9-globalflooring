@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<modification>
+
+	<id>Shoppa</id>
+	<version>1.13</version>
+	<vqmver>2.1.7</vqmver>
+	<author>Sokopedian - SokoThemes.com</author>
+	<!-- Shoppa Theme for OpenCart Version 1.5.4+ -->
+	
+	<!-- ADMIN AREA START -->
+		<file name="admin/view/template/common/header.tpl">
+			<operation error="skip">
+				<search position="after"><![CDATA[href="view/stylesheet/stylesheet.css" />]]></search>
+				<add trim="true"><![CDATA[<link type="text/css" rel="stylesheet" href="view/stylesheet/jquery.miniColors.css" />]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="after"><![CDATA[js/superfish.js"></script>]]></search>
+				<add trim="true"><![CDATA[<script type="text/javascript" src="view/javascript/jquery.miniColors.js"></script>]]></add>
+			</operation>
+		</file>
+	
+	<!-- ADMIN AREA END -->
+	
+	
+	<!-- CATALOG AREA START -->
+	
+		<file name="catalog/view/theme/shoppa/template/*/*.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[/default/]]></search>
+				<add trim="true"><![CDATA[/shoppa/]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/product/product.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" class="colorbox" rel="colorbox"><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>]]></search>
+				<add trim="true"><![CDATA[<a href="<?php echo $image['popup']; ?>" title="<?php echo $heading_title; ?>" <?php if ($config_enable_cloud_zoom) { ?>class='cloud-zoom-gallery' rel="useZoom: 'zoom1', smallImage: '<?php echo $image['thumb_large']; ?>' "<?php } else { ?>class="colorbox" rel="colorbox"<?php } ?>><img src="<?php echo $image['thumb']; ?>" title="<?php echo $heading_title; ?>" alt="<?php echo $heading_title; ?>" /></a>]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div><span>&nbsp;&nbsp;&nbsp;<?php echo $text_or; ?>&nbsp;&nbsp;&nbsp;</span></div>]]></search>
+				<add trim="true"><![CDATA[<div><span>&nbsp;&nbsp;&nbsp;</span></div>]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<a href="#tab-related"><?php echo $tab_related; ?> (<?php echo count($products); ?>)</a>]]></search>
+				<add trim="true"><![CDATA[<!-- <a href="#tab-related"><?php echo $tab_related; ?> (<?php echo count($products); ?>)</a> -->]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div id="tab-related" class="tab-content">]]></search>
+				<add trim="true"><![CDATA[<div id="box-heading"><h3><?php echo $tab_related; ?> <!-- (<?php echo count($products); ?>) --></h3></div>
+  <div>]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="image"><a href="<?php echo $product['href']; ?>"><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></a></div>]]></search>
+				<add trim="true"><![CDATA[<div class="image"><a href="<?php echo $product['href']; ?>"><span><img src="<?php echo $product['thumb']; ?>" alt="<?php echo $product['name']; ?>" /></span></a></div>]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<input type="text" name="quantity" size="2" value="<?php echo $minimum; ?>" />]]></search>
+				<add trim="true"><![CDATA[<input type="button" class="quantity-arrow-subtract" onclick="var quantity_el = document.getElementById('quantity'); var quantity = quantity_el.value; if( !isNaN( quantity ) &amp;&amp; quantity &gt; 0 ) quantity_el.value--;return false;"> 
+          <input type="text" name="quantity" id="quantity" size="1" value="<?php echo $minimum; ?>" />
+		  <input type="button" class="quantity-arrow-add" onclick="var quantity_el = document.getElementById('quantity'); var quantity = quantity_el.value; if( !isNaN( quantity )) quantity_el.value++;return false;">]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" />&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $reviews; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write; ?></a></div>]]></search>
+				<add trim="true"><![CDATA[<div><div class="stars"><img src="catalog/view/theme/default/image/stars-<?php echo $rating; ?>.png" alt="<?php echo $reviews; ?>" /></div>
+		<div class="rate-links">&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $reviews; ?></a>&nbsp;&nbsp;|&nbsp;&nbsp;<a onclick="$('a[href=\'#tab-review\']').trigger('click');"><?php echo $text_write; ?></a></div></div>]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div><a onclick="addToWishList('<?php echo $product_id; ?>');"><?php echo $button_wishlist; ?></a><br />]]></search>
+				<add trim="true"><![CDATA[<div><a onclick="addToWishList('<?php echo $product_id; ?>');">&#43;&nbsp;<?php echo $button_wishlist; ?></a><br />]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<a onclick="addToCompare('<?php echo $product_id; ?>');"><?php echo $button_compare; ?></a></div>]]></search>
+				<add trim="true"><![CDATA[<a onclick="addToCompare('<?php echo $product_id; ?>');">&#43;&nbsp;<?php echo $button_compare; ?></a></div>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/product/*.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>]]></search>
+				<add trim="true"><![CDATA[]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="after"><![CDATA[<div class="display"><b><?php echo $text_display; ?></b> <?php echo $text_list; ?> <b>/</b> <a onclick="display('grid');"><?php echo $text_grid; ?></a></div>]]></search>
+				<add trim="true"><![CDATA[<div class="product-compare"><a href="<?php echo $compare; ?>" id="compare-total"><?php echo $text_compare; ?></a></div>]]></add>
+			</operation>
+		</file>
+	
+		<file name="catalog/controller/product/product.php">
+			<operation error="skip">
+				<search position="after" offset="1"><![CDATA[$this->data['points'] = $product_info['points'];]]></search>
+				<add trim="true"><![CDATA[if (isset($this->request->post['config_enable_cloud_zoom'])) {
+			$this->data['config_enable_cloud_zoom'] = $this->request->post['config_enable_cloud_zoom']; 
+		} else {
+			$this->data['config_enable_cloud_zoom'] = $this->config->get('config_enable_cloud_zoom');
+		}
+		
+		if (isset($this->request->post['config_enable_pinterest_button'])) {
+			$this->data['config_enable_pinterest_button'] = $this->request->post['config_enable_pinterest_button']; 
+		} else {
+			$this->data['config_enable_pinterest_button'] = $this->config->get('config_enable_pinterest_button');
+		}]]></add>
+			</operation>
+			<operation error="log">
+				<search position="after"><![CDATA['thumb' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_additional_width'), $this->config->get('config_image_additional_height'))]]></search>
+				<add trim="true"><![CDATA[,
+					'thumb_large' => $this->model_tool_image->resize($result['image'], $this->config->get('config_image_thumb_width'), $this->config->get('config_image_thumb_height'))]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/account.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="box-heading"><?php echo $heading_title; ?></div>]]></search>
+				<add trim="true"><![CDATA[<div class="box-heading"><h3><?php echo $heading_title; ?></h3></div>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/affiliate.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="box-heading"><?php echo $heading_title; ?></div>]]></search>
+				<add trim="true"><![CDATA[<div class="box-heading"><h3><?php echo $heading_title; ?></h3></div>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/cart.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<h4><?php echo $heading_title; ?></h4>]]></search>
+				<add trim="true"><![CDATA[<!-- <h4><?php echo $heading_title; ?></h4> -->]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="checkout"><a href="<?php echo $cart; ?>"><?php echo $text_cart; ?></a> | <a href="<?php echo $checkout; ?>"><?php echo $text_checkout; ?></a></div>]]></search>
+				<add trim="true"><![CDATA[<div class="checkout"><a href="<?php echo $cart; ?>" class="button"><?php echo $text_cart; ?></a>&nbsp;&nbsp;&nbsp;<a href="<?php echo $checkout; ?>" class="button"><?php echo $text_checkout; ?></a></div>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/language.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<?php echo $text_language; ?><br />]]></search>
+				<add trim="true"><![CDATA[]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/currency.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<?php echo $text_currency; ?><br />]]></search>
+				<add trim="true"><![CDATA[]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/category.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="box-heading"><?php echo $heading_title; ?></div>]]></search>
+				<add trim="true"><![CDATA[<div class="box-heading"><h3><?php echo $heading_title; ?></h3></div>]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<a href="<?php echo $child['href']; ?>" class="active"> - <?php echo $child['name']; ?></a>]]></search>
+				<add trim="true"><![CDATA[<a href="<?php echo $child['href']; ?>" class="active"><?php echo $child['name']; ?></a>]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="replace"><![CDATA[<a href="<?php echo $child['href']; ?>"> - <?php echo $child['name']; ?></a>]]></search>
+				<add trim="true"><![CDATA[<a href="<?php echo $child['href']; ?>"><?php echo $child['name']; ?></a>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/featured.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="box-heading"><?php echo $heading_title; ?></div>]]></search>
+				<add trim="true"><![CDATA[<div class="box-heading"><h3><?php echo $heading_title; ?></h3></div>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/bestseller.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="box-heading"><?php echo $heading_title; ?></div>]]></search>
+				<add trim="true"><![CDATA[<div class="box-heading"><h3><?php echo $heading_title; ?></h3></div>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/special.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="box-heading"><?php echo $heading_title; ?></div>]]></search>
+				<add trim="true"><![CDATA[<div class="box-heading"><h3><?php echo $heading_title; ?></h3></div>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/view/theme/shoppa/template/module/latest.tpl">
+			<operation error="skip">
+				<search position="replace"><![CDATA[<div class="box-heading"><?php echo $heading_title; ?></div>]]></search>
+				<add trim="true"><![CDATA[<div class="box-heading"><h3><?php echo $heading_title; ?></h3></div>]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/controller/common/footer.php">
+			<operation error="skip">
+				<search position="before"><![CDATA[$this->load->model('catalog/information');]]></search>
+				<add trim="true"><![CDATA[		if (isset($this->request->post['config_activate_social_profiles'])) {
+				$this->data['config_activate_social_profiles'] = $this->request->post['config_activate_social_profiles']; 
+			} else {
+				$this->data['config_activate_social_profiles'] = $this->config->get('config_activate_social_profiles');
+			}
+			
+			if (isset($this->request->post['config_activate_facebook'])) {
+				$this->data['config_activate_facebook'] = $this->request->post['config_activate_facebook']; 
+			} else {
+				$this->data['config_activate_facebook'] = $this->config->get('config_activate_facebook');
+			}
+			
+			if (isset($this->request->post['config_facebook_url'])) {
+				$this->data['config_facebook_url'] = $this->request->post['config_facebook_url']; 
+			} else {
+				$this->data['config_facebook_url'] = $this->config->get('config_facebook_url');
+			}
+			
+			if (isset($this->request->post['config_activate_twitter'])) {
+				$this->data['config_activate_twitter'] = $this->request->post['config_activate_twitter']; 
+			} else {
+				$this->data['config_activate_twitter'] = $this->config->get('config_activate_twitter');
+			}
+			
+			if (isset($this->request->post['config_twitter_url'])) {
+				$this->data['config_twitter_url'] = $this->request->post['config_twitter_url']; 
+			} else {
+				$this->data['config_twitter_url'] = $this->config->get('config_twitter_url');
+			}
+			
+			if (isset($this->request->post['config_activate_gplus'])) {
+				$this->data['config_activate_gplus'] = $this->request->post['config_activate_gplus']; 
+			} else {
+				$this->data['config_activate_gplus'] = $this->config->get('config_activate_gplus');
+			}
+			
+			if (isset($this->request->post['config_gplus_url'])) {
+				$this->data['config_gplus_url'] = $this->request->post['config_gplus_url']; 
+			} else {
+				$this->data['config_gplus_url'] = $this->config->get('config_gplus_url');
+			}
+			
+			if (isset($this->request->post['config_activate_pinterest'])) {
+				$this->data['config_activate_pinterest'] = $this->request->post['config_activate_pinterest']; 
+			} else {
+				$this->data['config_activate_pinterest'] = $this->config->get('config_activate_pinterest');
+			}
+			
+			if (isset($this->request->post['config_pinterest_url'])) {
+				$this->data['config_pinterest_url'] = $this->request->post['config_pinterest_url']; 
+			} else {
+				$this->data['config_pinterest_url'] = $this->config->get('config_pinterest_url');
+			}
+			
+			if (isset($this->request->post['config_facontact_email'])) {
+				$this->data['config_facontact_email'] = $this->request->post['config_facontact_email']; 
+			} else {
+				$this->data['config_facontact_email'] = $this->config->get('config_facontact_email');
+			}
+			
+			if (isset($this->request->post['config_facontact_phone'])) {
+				$this->data['config_facontact_phone'] = $this->request->post['config_facontact_phone']; 
+			} else {
+				$this->data['config_facontact_phone'] = $this->config->get('config_facontact_phone');
+			}
+			
+			if (isset($this->request->post['config_facontact_fax'])) {
+				$this->data['config_facontact_fax'] = $this->request->post['config_facontact_fax']; 
+			} else {
+				$this->data['config_facontact_fax'] = $this->config->get('config_facontact_fax');
+			}
+			
+			if (isset($this->request->post['config_facontact_address'])) {
+				$this->data['config_facontact_address'] = $this->request->post['config_facontact_address']; 
+			} else {
+				$this->data['config_facontact_address'] = $this->config->get('config_facontact_address');
+			}]]></add>
+			</operation>
+		</file>
+		
+		<file name="catalog/controller/common/header.php">
+			<operation error="skip">
+				<search position="after" offset="1"><![CDATA[$this->data['checkout'] = $this->url->link('checkout/checkout', '', 'SSL');]]></search>
+				<add trim="true"><![CDATA[	
+			
+			$this->data['text_call'] = $this->language->get('text_call');
+	
+			if ($this->config->get('config_ebg') && file_exists(DIR_IMAGE . $this->config->get('config_ebg'))) {
+				$this->data['ebg'] = $server . $this->config->get('config_ebg');
+			} else {
+				$this->data['ebg'] = '';
+			}
+			
+			if (isset($this->request->post['config_upload_your_own_pattern'])) {
+				$this->data['config_upload_your_own_pattern'] = $this->request->post['config_upload_your_own_pattern'];
+			} else {
+				$this->data['config_upload_your_own_pattern'] = $this->config->get('config_upload_your_own_pattern');
+			}
+			
+			if (isset($this->request->post['config_background_repeat'])) {
+				$this->data['config_background_repeat'] = $this->request->post['config_background_repeat'];
+			} else {
+				$this->data['config_background_repeat'] = $this->config->get('config_background_repeat');
+			}
+			
+			if (isset($this->request->post['config_background_position'])) {
+				$this->data['config_background_position'] = $this->request->post['config_background_position'];
+			} else {
+				$this->data['config_background_position'] = $this->config->get('config_background_position');
+			}
+			
+			if (isset($this->request->post['config_background_attachment'])) {
+				$this->data['config_background_attachment'] = $this->request->post['config_background_attachment'];
+			} else {
+				$this->data['config_background_attachment'] = $this->config->get('config_background_attachment');
+			}
+
+			if (isset($this->request->post['config_enable_responsive_view'])) {
+				$this->data['config_enable_responsive_view'] = $this->request->post['config_enable_responsive_view']; 
+			} else {
+				$this->data['config_enable_responsive_view'] = $this->config->get('config_enable_responsive_view');
+			}
+			
+			if (isset($this->request->post['config_facontact_phone'])) {
+				$this->data['config_facontact_phone'] = $this->request->post['config_facontact_phone']; 
+			} else {
+				$this->data['config_facontact_phone'] = $this->config->get('config_facontact_phone');
+			}
+
+			if (isset($this->request->post['config_logo_top_spacing'])) {
+				$this->data['config_logo_top_spacing'] = $this->request->post['config_logo_top_spacing']; 
+			} else {
+				$this->data['config_logo_top_spacing'] = $this->config->get('config_logo_top_spacing');
+			}
+
+			if (isset($this->request->post['config_activate_theme_color_editor'])) {
+				$this->data['config_activate_theme_color_editor'] = $this->request->post['config_activate_theme_color_editor'];
+			} else {
+				$this->data['config_activate_theme_color_editor'] = $this->config->get('config_activate_theme_color_editor');
+			}
+			
+			if (isset($this->request->post['config_choose_background_texture'])) {
+				$this->data['config_choose_background_texture'] = $this->request->post['config_choose_background_texture'];
+			} else {
+				$this->data['config_choose_background_texture'] = $this->config->get('config_choose_background_texture');
+			}	
+
+			if (isset($this->request->post['body_bg'])) {			
+				$this->data['body_bg'] = $this->request->post['body_bg'];
+			} else {
+				$this->data['body_bg'] = $this->config->get('body_bg');
+			}
+
+			if (isset($this->request->post['body_links_color'])) {			
+				$this->data['body_links_color'] = $this->request->post['body_links_color'];
+			} else {
+				$this->data['body_links_color'] = $this->config->get('body_links_color');
+			}
+
+			if (isset($this->request->post['general_color'])) {			
+				$this->data['general_color'] = $this->request->post['general_color'];
+			} else {
+				$this->data['general_color'] = $this->config->get('general_color');
+			}
+
+			if (isset($this->request->post['config_activate_google_custom_fonts'])) {
+				$this->data['config_activate_google_custom_fonts'] = $this->request->post['config_activate_google_custom_fonts'];
+			} else {
+				$this->data['config_activate_google_custom_fonts'] = $this->config->get('config_activate_google_custom_fonts');
+			}
+
+			if (isset($this->request->post['config_choose_header_font'])) {
+				$this->data['config_choose_header_font'] = $this->request->post['config_choose_header_font'];
+			} else {
+				$this->data['config_choose_header_font'] = $this->config->get('config_choose_header_font');
+			}
+
+			if (isset($this->request->post['config_choose_menu_font'])) {
+				$this->data['config_choose_menu_font'] = $this->request->post['config_choose_menu_font'];
+			} else {
+				$this->data['config_choose_menu_font'] = $this->config->get('config_choose_menu_font');
+			}
+
+			if (isset($this->request->post['config_activate_theme_color_editor'])) {
+				$this->data['config_activate_theme_color_editor'] = $this->request->post['config_activate_theme_color_editor'];
+			} else {
+				$this->data['config_activate_theme_color_editor'] = $this->config->get('config_activate_theme_color_editor');
+			}]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="after"><![CDATA['name'  => $child['name'] . ($this->config->get('config_product_count') ? ' (' . $product_total . ')' : ''),]]></search>
+				<add trim="true"><![CDATA['category_id' => $child['category_id'],]]></add>
+			</operation>
+			<operation error="skip">
+				<search position="after"><![CDATA['children' => $children_data,]]></search>
+				<add trim="true"><![CDATA['category_id' => $category['category_id'],]]></add>
+			</operation>
+		</file>
+
+	<!-- CATALOG END -->
+	
+	<!-- LANGUAGE CODES START HERE -->
+		
+		<file name="catalog/language/english/common/footer.php">
+			<operation error="skip">
+				<search position="bottom"><![CDATA[]]></search>
+				<add trim="true"><![CDATA[<?php 
+				$_['text_powered']      = '&copy; %s %s';
+				?>]]></add>
+			</operation>
+		</file>
+		
+	<!-- LANGUAGE CODES END HERE -->
+	
+	<!-- TRANSLATED LANGUAGE CODES START HERE -->	
+		
+	<!-- TRANSLATED LANGUAGE CODES END HERE -->	
+
+</modification>
